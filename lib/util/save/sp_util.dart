@@ -24,7 +24,7 @@ class SpUtil {
     }
   }
 
-    ///获取用户信息
+  ///获取用户信息
   ///[UserEntity] 用户信息
   static UserEntity? getUserInfo() {
     SharedPreferences sp = Get.find<SharedPreferences>();
@@ -39,5 +39,12 @@ class SpUtil {
       debugPrint(e.toString());
       return null;
     }
+  }
+
+  ///存储用户信息
+  ///[userInfo] 用户信息
+  static putUserInfo(UserEntity userInfo) {
+    Get.find<SharedPreferences>()
+        .setString(SPKey.keyUserInfo, jsonEncode(userInfo.toJson()));
   }
 }

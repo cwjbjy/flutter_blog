@@ -1,4 +1,6 @@
 import 'package:flutter_blog/constants/strings.dart';
+import 'package:flutter_blog/http/repository.dart';
+import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/toast_util.dart';
 import 'package:get/get.dart';
 
@@ -33,9 +35,9 @@ class LoginController extends GetxController {
       return;
     }
 
-    // request.login(account, password, success: (data) {
-    //   ToastUtils.show(StringStyles.loginSuccess.tr);
-    //   Get.offAllNamed(Routes.homePage);
-    // });
+    RequestRepository().login(account.value, password.value, success: (data) {
+      ToastUtils.show(StringStyles.loginSuccess.tr);
+      // Get.offAllNamed(Routes.homePage);
+    });
   }
 }
