@@ -1,9 +1,7 @@
-import 'package:blog/res/style.dart';
-import 'package:blog/util/formatter/customized_length_formatter.dart';
-import 'package:blog/util/formatter/customized_text_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_blog/constants/style.dart';
+import 'package:flutter_blog/util/formatter/customized_length_formatter.dart';
+import 'package:flutter_blog/util/formatter/customized_text_formatter.dart';
 
 /// @class : EditWidget
 /// @date : 2021/08/17
@@ -14,31 +12,29 @@ class EditWidget extends StatefulWidget {
   final ValueChanged<String>? onChanged;
 
   ///提示文字
-  String hintText = "";
+  final String hintText;
 
   ///图标Widget
-  Widget iconWidget;
+  final Widget iconWidget;
 
   ///图标Widget
-  bool passwordType = false;
+  final bool passwordType;
 
-  EditWidget({
-    Key? key,
+  const EditWidget({
+    super.key,
     this.onChanged,
     this.hintText = "",
     this.passwordType = false,
     required this.iconWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<EditWidget> createState() => _EditWidgetState();
 }
 
 class _EditWidgetState extends State<EditWidget> {
-
   bool showPassWord = false;
   bool eyeExpand = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +42,7 @@ class _EditWidgetState extends State<EditWidget> {
       alignment: AlignmentDirectional.centerStart,
       children: [
         Container(
+          margin: const EdgeInsets.only(top: 8, bottom: 8, left: 25, right: 25),
           child: TextField(
             keyboardType: TextInputType.number,
             textAlign: TextAlign.left,
@@ -82,7 +79,6 @@ class _EditWidgetState extends State<EditWidget> {
                 contentPadding: const EdgeInsets.only(
                     top: 16, bottom: 16, left: 60, right: 16)),
           ),
-          margin: const EdgeInsets.only(top: 8, bottom: 8, left: 25, right: 25),
         ),
         Positioned(
           width: 36,
@@ -107,7 +103,7 @@ class _EditWidgetState extends State<EditWidget> {
                 eyeExpand ? Icons.remove_red_eye : Icons.visibility_off,
                 size: 24,
                 color: Colors.white,
-              ) ,
+              ),
               onPressed: () {
                 setState(() {
                   eyeExpand = !eyeExpand;

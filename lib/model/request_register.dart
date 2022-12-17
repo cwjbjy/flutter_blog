@@ -1,12 +1,5 @@
-
-
-
-/// @class : UserEntity
-/// @date : 2021/08/23
-/// @name : jhf
 /// @description : 用户信息
 class UserEntity {
-
   bool admin = false;
   List<dynamic> chapterTops = [];
   int coinCount = 0;
@@ -52,7 +45,6 @@ class UserEntity {
     collectIds = json['collectIds'];
     chapterTops = json['chapterTops'];
   }
-
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

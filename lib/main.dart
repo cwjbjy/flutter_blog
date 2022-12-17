@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'constants/strings.dart';
 import 'routes/routes.dart';
+import 'util/keyboard_util.dart';
 import 'util/screen_util.dart';
 import 'util/injection_init.dart';
 import 'util/locale_util.dart';
@@ -24,6 +25,16 @@ class MyApp extends StatelessWidget {
       getPages: Routes.routePage,
       initialRoute: Routes.splashPage,
       debugShowCheckedModeBanner: false,
+
+      builder: (context, child) => Scaffold(
+        // 点击空白区域，隐藏软键盘
+        body: GestureDetector(
+          onTap: () {
+            KeyboardUtils.hideKeyboard(context);
+          },
+          child: child,
+        ),
+      ),
 
       //国际化支持-来源配置
       translations: Messages(),

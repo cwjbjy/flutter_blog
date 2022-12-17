@@ -1,6 +1,6 @@
+import 'package:flutter_blog/pages/login_page/login.dart';
 import 'package:get/get.dart';
 import 'package:flutter_blog/pages/splash_page/splash.dart';
-
 
 abstract class Routes {
   ///入口模块
@@ -19,6 +19,10 @@ abstract class Routes {
     GetPage(
       name: splashPage,
       page: () => const SplashPage(),
+    ),
+    GetPage(
+      name: loginPage,
+      page: () => const LoginPage(),
     ),
   ];
 }
