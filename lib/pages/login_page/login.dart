@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/constants/button_style.dart';
 import 'package:flutter_blog/constants/colors.dart';
 import 'package:flutter_blog/constants/r.dart';
-import 'package:flutter_blog/constants/strings.dart';
+import 'package:flutter_blog/i18/strings.dart';
 import 'package:flutter_blog/constants/style.dart';
 import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/keyboard_util.dart';

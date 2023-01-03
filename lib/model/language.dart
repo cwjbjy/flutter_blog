@@ -1,20 +1,25 @@
-import 'package:flutter_blog/constants/strings.dart';
+import 'package:flutter_blog/i18/strings.dart';
 import 'package:get/get.dart';
 
 /// @description :语言
 class Language {
-  String name = '';
+  String? name;
   String language = '';
   String country = '';
-  bool isSelect = false;
+  bool? isSelect = false;
 
-  Language(this.name, this.language, this.country, {this.isSelect = false});
+  Language(
+      {this.name,
+      required this.language,
+      required this.country,
+      this.isSelect});
 
-  Language.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        language = json['language'],
-        country = json['country'],
-        isSelect = json['isSelect'];
+  Language.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    language = json['language'];
+    country = json['country'];
+    isSelect = json['isSelect'];
+  }
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -26,9 +31,8 @@ class Language {
 
 ///新增语言要在此处手动增加
 final languageList = [
-  Language(StringStyles.settingLanguageDefault.tr, '', ''),
-  Language('简体中文', 'zh', 'CN'),
-  Language('繁體中文(香港)', 'zh', 'HK'),
-  Language('繁體中文(台灣)', 'zh', 'TW'),
-  Language('English', 'zh', 'US'),
+  Language(
+      name: StringStyles.settingLanguageDefault.tr, language: '', country: ''),
+  Language(name: '简体中文', language: 'zh', country: 'CN'),
+  Language(name: 'English', language: 'zh', country: 'US'),
 ];

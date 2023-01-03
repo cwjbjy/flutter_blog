@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'constants/strings.dart';
+import 'i18/messages.dart';
 import 'routes/routes.dart';
 import 'util/keyboard_util.dart';
 import 'util/screen_util.dart';

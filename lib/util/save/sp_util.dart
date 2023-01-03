@@ -24,6 +24,14 @@ class SpUtil {
     }
   }
 
+  ///存储语言
+  ///[Language] 语言
+  static updateLanguage(Language language) {
+    Get.find<SharedPreferences>().remove(SPKey.language);
+    Get.find<SharedPreferences>()
+        .setString(SPKey.language, jsonEncode(language));
+  }
+
   ///获取用户信息
   ///[UserEntity] 用户信息
   static UserEntity? getUserInfo() {
@@ -45,6 +53,6 @@ class SpUtil {
   ///[userInfo] 用户信息
   static putUserInfo(UserEntity userInfo) {
     Get.find<SharedPreferences>()
-        .setString(SPKey.keyUserInfo, jsonEncode(userInfo.toJson()));
+        .setString(SPKey.keyUserInfo, jsonEncode(userInfo));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_blog/constants/strings.dart';
+import 'package:flutter_blog/i18/strings.dart';
 import 'package:flutter_blog/http/repository.dart';
 import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/toast_util.dart';
