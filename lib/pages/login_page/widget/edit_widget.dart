@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/constants/style.dart';
+import 'package:flutter_blog/style/style.dart';
 import 'package:flutter_blog/util/formatter/customized_length_formatter.dart';
 import 'package:flutter_blog/util/formatter/customized_text_formatter.dart';
 

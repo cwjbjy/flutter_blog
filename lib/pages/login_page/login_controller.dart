@@ -37,7 +37,7 @@ class LoginController extends GetxController {
 
     RequestRepository().login(account.value, password.value, success: (data) {
       ToastUtils.show(StringStyles.loginSuccess.tr);
-      // Get.offAllNamed(Routes.homePage);
+      Get.offAllNamed(Routes.homePage);
     });
   }
 }

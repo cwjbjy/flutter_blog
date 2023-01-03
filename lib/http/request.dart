@@ -22,7 +22,7 @@ class Request {
   static void get<T>(
     String url,
     parameters, {
-    bool isJson = false,
+    bool isJson = true,
     Success<T>? success,
     Fail? fail,
   }) {
@@ -38,7 +38,7 @@ class Request {
   static void post<T>(
     String url,
     parameters, {
-    bool isJson = true,
+    bool isJson = false,
     Success<T>? success,
     Fail? fail,
   }) {
@@ -56,7 +56,7 @@ class Request {
     Method method,
     String url,
     parameters, {
-    bool isJson = false,
+    required bool isJson,
     Success<T>? success,
     Fail? fail,
   }) {
@@ -81,11 +81,11 @@ class Request {
           ToastUtils.show(resultModel.errorMsg);
         }
       }
-    }, fail: (code, msg) {
+    }, fail: (msg) {
       debugPrint("request error =>$msg");
       ToastUtils.show(msg);
       if (fail != null) {
-        fail(code, msg);
+        fail(msg);
       }
     });
   }

@@ -32,10 +32,6 @@ class RequestRepository {
       if (success != null) {
         success(registerInfo);
       }
-    }, fail: (code, msg) {
-      if (fail != null) {
-        fail(code, msg);
-      }
     });
   }
 
@@ -51,18 +47,21 @@ class RequestRepository {
     Fail? fail,
   }) {
     Request.post<dynamic>(
-        '${RequestApi.apiLogin}?username=$account&password=$password',
-        {"username": account, "password": password}, success: (data) {
-      var loginInfo = UserEntity.fromJson(data);
-      loginInfo.password = password;
-      SpUtil.putUserInfo(loginInfo);
-      if (success != null) {
-        success(loginInfo);
-      }
-    }, fail: (code, msg) {
-      if (fail != null) {
-        fail(code, msg);
-      }
-    });
+      RequestApi.apiLogin,
+      {"username": account, "password": password},
+      success: (data) {
+        var loginInfo = UserEntity.fromJson(data);
+        loginInfo.password = password;
+        SpUtil.putUserInfo(loginInfo);
+        if (success != null) {
+          success(loginInfo);
+        }
+      },
+    );
+  }
+
+
+  banner(){
+    Request.get(RequestApi.apiBanner,{});
   }
 }

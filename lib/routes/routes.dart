@@ -1,5 +1,6 @@
-import 'package:flutter_blog/pages/login_page/login.dart';
 import 'package:get/get.dart';
+import 'package:flutter_blog/pages/home_page/home.dart';
+import 'package:flutter_blog/pages/login_page/login.dart';
 import 'package:flutter_blog/pages/splash_page/splash.dart';
 
 abstract class Routes {
@@ -23,6 +24,10 @@ abstract class Routes {
     GetPage(
       name: loginPage,
       page: () => const LoginPage(),
+    ),
+    GetPage(
+      name: homePage,
+      page: () => const HomePage(),
     ),
   ];
 }

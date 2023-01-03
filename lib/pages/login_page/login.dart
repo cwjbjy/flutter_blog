@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/constants/button_style.dart';
-import 'package:flutter_blog/constants/colors.dart';
+import 'package:flutter_blog/style/button_style.dart';
+import 'package:flutter_blog/style/colors.dart';
 import 'package:flutter_blog/constants/r.dart';
 import 'package:flutter_blog/i18/strings.dart';
-import 'package:flutter_blog/constants/style.dart';
+import 'package:flutter_blog/style/style.dart';
 import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/keyboard_util.dart';
 import 'package:flutter_blog/widget/logo_name_widget.dart';
@@ -46,14 +46,14 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.white,
               ),
               hintText: StringStyles.loginAccountNameHint.tr,
-              onChanged: (text) => controller..account.value = text),
+              onChanged: (text) => controller.account.value = text),
 
           ///密码输入框
           EditWidget(
               iconWidget: const Icon(Icons.lock_open, color: Colors.white),
               hintText: StringStyles.loginAccountPwdHint.tr,
               passwordType: true,
-              onChanged: (text) => controller..password.value = text),
+              onChanged: (text) => controller.password.value = text),
 
           ///登录按钮
           Obx(() => Container(

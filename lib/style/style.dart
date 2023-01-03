@@ -1,4 +1,4 @@
-import 'package:flutter_blog/constants/colors.dart';
+import 'package:flutter_blog/style/colors.dart';
 import 'package:flutter/material.dart';
 
 /// @description :样式文件

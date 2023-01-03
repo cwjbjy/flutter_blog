@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/constants/colors.dart';
+import 'package:flutter_blog/style/colors.dart';
 
 /// @class : ButtonStyles
 /// @date : 2021/08/17

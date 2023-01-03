@@ -4,7 +4,7 @@ import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/save/sp_util.dart';
 import 'package:flutter_blog/constants/r.dart';
 import 'package:flutter_blog/i18/strings.dart';
-import 'package:flutter_blog/constants/style.dart';
+import 'package:flutter_blog/style/style.dart';
 import 'splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
