@@ -3,13 +3,10 @@ import 'package:flutter_blog/style/style.dart';
 import 'package:flutter_blog/util/formatter/customized_length_formatter.dart';
 import 'package:flutter_blog/util/formatter/customized_text_formatter.dart';
 
-/// @class : EditWidget
-/// @date : 2021/08/17
-/// @name : jhf
 /// @description :输入框样式，左边图标，右边输入框
 class EditWidget extends StatefulWidget {
   ///输入框文字改变
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String> onChanged;
 
   ///提示文字
   final String hintText;
@@ -22,7 +19,7 @@ class EditWidget extends StatefulWidget {
 
   const EditWidget({
     super.key,
-    this.onChanged,
+    required this.onChanged,
     this.hintText = "",
     this.passwordType = false,
     required this.iconWidget,
@@ -44,16 +41,14 @@ class _EditWidgetState extends State<EditWidget> {
         Container(
           margin: const EdgeInsets.only(top: 8, bottom: 8, left: 25, right: 25),
           child: TextField(
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.number, //键盘类型
             textAlign: TextAlign.left,
             autofocus: false,
             maxLines: 1,
-            obscureText: eyeExpand && widget.passwordType,
+            obscureText: eyeExpand && widget.passwordType, //是否隐藏正在编辑的文本
             style: Styles.style_white_16,
             onChanged: (text) {
-              if (widget.onChanged != null) {
-                widget.onChanged!(text);
-              }
+              widget.onChanged(text);
               setState(() {
                 showPassWord = text.isNotEmpty;
               });

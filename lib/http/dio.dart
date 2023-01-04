@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
 import 'api.dart';
+import 'package:flutter_blog/util/toast_util.dart';
 
 typedef Success<T> = Function(T data);
-typedef Fail = Function(String msg);
 
 /// @description :请求工具
 class HttpRequest {
@@ -33,16 +33,18 @@ class HttpRequest {
   /// [path]：请求地址
   /// [params]：请求参数
   /// [success]：请求成功回调
-  /// [error]：请求失败回调
-  static Future request<T>(Method method, String path, dynamic params,
-      {bool isJson = true,
-      required Success success,
-      required Fail fail}) async {
+  static Future request<T>(
+    Method method,
+    String path, {
+    dynamic params,
+    bool isJson = true,
+    required Success success,
+  }) async {
     try {
       ///请求前先检查网络连接
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
-        fail('网络异常，请检查你的网络！');
+        ToastUtils.show('网络异常，请检查你的网络！');
         return;
       }
       Dio dio = createInstance(isJson);

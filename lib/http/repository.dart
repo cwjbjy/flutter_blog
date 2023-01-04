@@ -13,15 +13,13 @@ class RequestRepository {
   /// [password]密码
   /// [password]重复密码
   /// [success] 请求成功回调
-  /// [fail] 请求失败回调
-  register(
+  static register(
     String account,
     String password,
     String rePassword, {
     Success<UserEntity>? success,
-    Fail? fail,
   }) {
-    Request.post<dynamic>(RequestApi.apiRegister, {
+    Request.post<dynamic>(RequestApi.apiRegister, params: {
       "username": account,
       "password": password,
       "repassword": rePassword
@@ -39,16 +37,14 @@ class RequestRepository {
   /// [account]账号
   /// [password]密码
   /// [success] 请求成功回调
-  /// [fail] 请求失败回调
-  login(
+  static login(
     String account,
     String password, {
     Success<UserEntity>? success,
-    Fail? fail,
   }) {
     Request.post<dynamic>(
       RequestApi.apiLogin,
-      {"username": account, "password": password},
+      params: {"username": account, "password": password},
       success: (data) {
         var loginInfo = UserEntity.fromJson(data);
         loginInfo.password = password;
@@ -60,8 +56,7 @@ class RequestRepository {
     );
   }
 
-
-  banner(){
-    Request.get(RequestApi.apiBanner,{});
+  static banner() {
+    Request.get(RequestApi.apiBanner);
   }
 }

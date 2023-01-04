@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/style/colors.dart';
 
-/// @class : ButtonStyles
-/// @date : 2021/08/17
-/// @name : jhf
 /// @description :ButtonStyles样式
 class ButtonStyles {
   /// Button公共样式，默认点击效果

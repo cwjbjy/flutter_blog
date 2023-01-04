@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 /// @description :登录Logo
 class LogoNameWidget extends StatelessWidget {
-  const LogoNameWidget({Key? key}) : super(key: key);
+  const LogoNameWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
