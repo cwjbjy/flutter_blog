@@ -13,7 +13,6 @@ import 'package:flutter_blog/widget/logo_name_widget.dart';
 import 'package:flutter_blog/widget/toolbar.dart';
 import 'package:get/get.dart';
 
-import 'register_controller.dart';
 import 'widget/registerPrivacyWidget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -27,8 +26,13 @@ class _RegisterPageState extends State<RegisterPage> {
   String account = '';
   String password = '';
   String rePassword = '';
+  bool isCheckPrivacy = true;
 
-  final RegisterController controller = Get.put(RegisterController());
+  void _updateCheck() {
+    setState(() {
+      isCheckPrivacy = !isCheckPrivacy;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
 
                   ///用户服务条款
-                  const RegisterPrivacyWidget(),
+                  RegisterPrivacyWidget(isCheckPrivacy:isCheckPrivacy,onchange:_updateCheck),
 
                   ///注册按钮
                   Container(
@@ -164,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     ///同意服务条款
-    if (!controller.isCheckPrivacy.value) {
+    if (!isCheckPrivacy) {
       ToastUtils.show(StringStyles.registerNotServiceTerms.tr);
       return;
     }
