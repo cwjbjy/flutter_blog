@@ -2,9 +2,6 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-/// @class : ShadowStyle
-/// @date : 2021/08/23
-/// @name : jhf
 /// @description :阴影样式
 class ShadowStyle {
   ///背景:透明

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_blog/http/api.dart';
 import 'package:flutter_blog/http/dio.dart';
 import 'package:flutter_blog/model/request_result.dart';
 import 'package:flutter_blog/util/toast_util.dart';
+import 'package:flutter_blog/get/get_extension.dart';
+import 'package:get/get.dart';
 
 /// @description :请求发起
 class Request {
@@ -13,10 +16,11 @@ class Request {
     String url, {
     dynamic params,
     bool isJson = true,
+    bool dialog = true,
     Success<T>? success,
   }) {
     _request(Method.GET, url,
-        params: params, isJson: isJson, success: success);
+        params: params, isJson: isJson, dialog: dialog, success: success);
   }
 
   /// 发起POST请求
@@ -27,10 +31,11 @@ class Request {
     String url, {
     dynamic params,
     bool isJson = false,
+    bool dialog = true,
     Success<T>? success,
   }) {
     _request(Method.POST, url,
-        params: params, isJson: isJson, success: success);
+        params: params, isJson: isJson, dialog: dialog, success: success);
   }
 
   /// 发起请求
@@ -43,11 +48,20 @@ class Request {
     String url, {
     dynamic params,
     required bool isJson,
+    bool dialog = true,
     Success<T>? success,
   }) {
+    if (dialog) {
+      Get.showLoading();
+    }
+    debugPrint("request url ==============> ${RequestApi.baseurl}$url");
+
     ///开启请求
-    HttpRequest.request(method, url, params:params, isJson: isJson,
+    HttpRequest.request(method, url, params: params, isJson: isJson,
         success: (result) {
+      if (dialog) {
+        Get.dismiss();
+      }
       if (success != null) {
         var resultModel = Result.fromJson(result);
         debugPrint("request success =>$resultModel");
@@ -58,6 +72,12 @@ class Request {
           ToastUtils.show(resultModel.errorMsg);
         }
       }
+    }, fail: (msg) {
+      debugPrint("request error =>$msg");
+      if (dialog) {
+        Get.dismiss();
+      }
+      ToastUtils.show(msg);
     });
   }
 }

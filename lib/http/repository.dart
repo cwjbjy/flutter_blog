@@ -1,5 +1,6 @@
 import 'package:flutter_blog/http/api.dart';
 import 'package:flutter_blog/http/dio.dart';
+import 'package:flutter_blog/model/banner_mode.dart';
 import 'package:flutter_blog/model/request_register.dart';
 import 'package:flutter_blog/util/save/sp_util.dart';
 
@@ -56,7 +57,37 @@ class RequestRepository {
     );
   }
 
-  static banner() {
-    Request.get(RequestApi.apiBanner);
+  /// 分享文章到站点
+  /// [title] 文章标题
+  /// [link] 文章链接
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  static shareArticle(
+    String title,
+    String link, {
+    Success<String>? success,
+  }) {
+    Request.post(RequestApi.apiAddArticle,
+        params: {'title': title, 'link': link}, dialog: false, success: (data) {
+      if (success != null) {
+        success("success");
+      }
+    });
+  }
+
+  ///获取首页的Banner图片
+  static getBanner({
+    Success<List<Banners>>? success,
+    Fail? fail,
+  }) {
+    Request.get<List<dynamic>>(RequestApi.apiBanner, dialog: false,
+        success: (data) {
+      if (success != null) {
+        var list = data.map((value) {
+          return Banners.fromJson(value);
+        }).toList();
+        success(list);
+      }
+    });
   }
 }

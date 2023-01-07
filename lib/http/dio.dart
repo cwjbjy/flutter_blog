@@ -1,10 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
 import 'api.dart';
-import 'package:flutter_blog/util/toast_util.dart';
 
 typedef Success<T> = Function(T data);
+typedef Fail = Function(String msg);
+
+/// 连接超时时间
+const int _connectTimeout = 10000;
+
+/// 接收超时时间
+const int _receiveTimeout = 10000;
+
+/// 发送超时时间
+const int _sendTimeout = 10000;
 
 /// @description :请求工具
 class HttpRequest {
@@ -20,6 +28,9 @@ class HttpRequest {
             ? Headers.jsonContentType
             : Headers.formUrlEncodedContentType,
         baseUrl: RequestApi.baseurl,
+        sendTimeout: _sendTimeout,
+        connectTimeout: _connectTimeout,
+        receiveTimeout: _receiveTimeout,
       );
       _dio = Dio(options);
     }
@@ -33,18 +44,16 @@ class HttpRequest {
   /// [path]：请求地址
   /// [params]：请求参数
   /// [success]：请求成功回调
-  static Future request<T>(
-    Method method,
-    String path, {
-    dynamic params,
-    bool isJson = true,
-    required Success success,
-  }) async {
+  static Future request<T>(Method method, String path,
+      {dynamic params,
+      bool isJson = true,
+      required Success success,
+      required Fail fail}) async {
     try {
       ///请求前先检查网络连接
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
-        ToastUtils.show('网络异常，请检查你的网络！');
+        fail('网络异常，请检查你的网络！');
         return;
       }
       Dio dio = createInstance(isJson);
@@ -52,7 +61,7 @@ class HttpRequest {
           data: params, options: Options(method: _methodValues[method]));
       success(response.data);
     } on DioError catch (e) {
-      debugPrint("异常=====>$e");
+      fail('异常=====>$e');
     }
   }
 }
