@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/model/banner_mode.dart';
 import 'package:flutter_blog/style/colors.dart';
 
-/// @class : BannerWidget
-/// @date : 2021/9/3
-/// @name : jhf
 /// @description :Banner
 class BannerWidget extends StatefulWidget {
   /// Banners列表数据

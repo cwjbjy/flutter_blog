@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/constants/r.dart';
 import 'package:flutter_blog/http/repository.dart';
 import 'package:flutter_blog/model/banner_mode.dart';
+import 'package:flutter_blog/model/project_model.dart';
 import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/util/web_util.dart';
+import 'package:flutter_blog/widget/ripple_widget.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'widget/banner_widget.dart';
+import 'widget/main_article_item.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,10 +23,40 @@ class _MainPageState extends State<MainPage> {
   ///首页Banner轮播图
   List<Banners> banner = [];
 
+  //首页数据
+  List<ProjectDetail> projectData = [];
+
+  //页数
+  int page = 0;
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
     getBanner();
+    getProject();
+  }
+
+  void getProject() {
+    RequestRepository.requestHomeArticle(page, success: (data, over) {
+      projectData.addAll(data);
+      setState(() {});
+    });
+  }
+
+  void _onRefresh() {
+    projectData.clear();
+    page = 0;
+    getProject();
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() {
+    page++;
+    getProject();
+    _refreshController.loadComplete();
   }
 
   void getBanner() {
@@ -50,69 +84,55 @@ class _MainPageState extends State<MainPage> {
           top: true,
           child: Column(
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                width: double.infinity,
-                height: 140,
-                child: BannerWidget(
-                  banner,
-                  height: 140,
-                  onTap: (index) {
-                    if (index == 0) {
-                      Get.toNamed(Routes.rankingPage);
-                    } else {
-                      WebUtil.toWebPageBanners(banner[index]);
-                    }
-                  },
+              Expanded(
+                  child: Container(
+                color: Colors.white,
+                child: SmartRefresher(
+                  enablePullUp: true,
+                  controller: _refreshController,
+                  onRefresh: _onRefresh,
+                  onLoading: _onLoading,
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemBuilder: (c, i) {
+                      if (i == 0) {
+                        return Container(
+                          margin: const EdgeInsets.only(top: 10, bottom: 10),
+                          width: double.infinity,
+                          height: 140,
+                          child: BannerWidget(
+                            banner,
+                            height: 140,
+                            onTap: (index) {
+                              if (index == 0) {
+                                Get.toNamed(Routes.rankingPage);
+                              } else {
+                                WebUtil.toWebPageBanners(banner[index]);
+                              }
+                            },
+                          ),
+                        );
+                      } else {
+                        return Material(
+                          color: Colors.transparent,
+                          child: Ripple(
+                              onTap: () => WebUtil.toWebPage(projectData[i-1],
+                                      onResult: (value) {
+                                    projectData[i-1].collect = value;
+                                  }),
+                              child: MainArticleItem(
+                                item: projectData[i-1],
+                                index: i,
+                              )),
+                        );
+                      }
+                    },
+                    itemCount: projectData.length,
+                  ),
                 ),
-              ),
-              // Expanded(
-              //     child: RefreshWidget(
-              //         child: ListView.builder(
-              //   padding: EdgeInsets.zero,
-              //   shrinkWrap: true,
-              //   itemCount: controller.projectData.length +
-              //       1 +
-              //       (controller.insertIndex == -1 ? 0 : 1),
-              //   itemBuilder: (BuildContext context, int index) {
-              //     ///将Banner装载到ListView中
-              //     if (index == 0) {
-              //     } else if (index == controller.insertIndex) {
-              //       ///随机出现的公众号列表
-              //       return Obx(() => WechatPublicWidget(
-              //             isFirst: controller.isFirst,
-              //             wechatPublic: controller.showWechatPublic,
-              //             onChange: () => controller.notifyRandomPublic(),
-              //             showSwitch: controller.showSwitch.value,
-              //             showDelete: controller.showDelete.value,
-              //             onTap: () => controller.notifyButtonState(),
-              //           ));
-              //     } else {
-              //       ///计算当前显示的真实索引
-              //       var newIndex = index -
-              //           (index > controller.insertIndex &&
-              //                   controller.insertIndex != -1
-              //               ? 2
-              //               : 1);
-
-              //       ///item列表数据展示
-              //       return Material(
-              //         color: Colors.transparent,
-              //         child: Ripple(
-              //             onTap: () => WebUtil.toWebPage(
-              //                     controller.projectData[newIndex],
-              //                     onResult: (value) {
-              //                   controller.projectData[newIndex].collect =
-              //                       value;
-              //                 }),
-              //             child: MainArticleItem(
-              //               item: controller.projectData[newIndex],
-              //               index: newIndex,
-              //             )),
-              //       );
-              //     }
-              //   },
-              // )))
+              ))
             ],
           )),
     );

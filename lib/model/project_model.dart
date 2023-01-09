@@ -80,9 +80,6 @@ class ProjectTag {
   }
 }
 
-/// @class : ProjectDetail
-/// @date : 2021/08/23
-/// @name : jhf
 /// @description : 项目详情
 class ProjectDetail {
   String apkLink = "";

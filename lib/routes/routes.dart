@@ -1,4 +1,5 @@
 import 'package:flutter_blog/pages/search_page/search.dart';
+import 'package:flutter_blog/pages/webview_page/webview.dart';
 import 'package:get/get.dart';
 import 'package:flutter_blog/pages/register_page/register.dart';
 import 'package:flutter_blog/pages/home_page/home.dart';
@@ -48,5 +49,8 @@ abstract class Routes {
       name: searchPage,
       page: () => const SearchPage(),
     ),
+    GetPage(
+        name: webViewPage,
+        page: () => const WebViewPage()),
   ];
 }

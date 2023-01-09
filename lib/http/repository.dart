@@ -1,6 +1,7 @@
 import 'package:flutter_blog/http/api.dart';
 import 'package:flutter_blog/http/dio.dart';
 import 'package:flutter_blog/model/banner_mode.dart';
+import 'package:flutter_blog/model/project_model.dart';
 import 'package:flutter_blog/model/request_register.dart';
 import 'package:flutter_blog/util/save/sp_util.dart';
 
@@ -78,7 +79,6 @@ class RequestRepository {
   ///获取首页的Banner图片
   static getBanner({
     Success<List<Banners>>? success,
-    Fail? fail,
   }) {
     Request.get<List<dynamic>>(RequestApi.apiBanner, dialog: false,
         success: (data) {
@@ -90,4 +90,26 @@ class RequestRepository {
       }
     });
   }
+
+    ///请求首页文章列表接口
+  ///[id]文章ID
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  static requestHomeArticle(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiHome.replaceFirst(RegExp('page'), page.toString()),
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    });
+  }
+
 }

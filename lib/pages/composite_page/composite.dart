@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 
 import 'modules/ask_page/ask.dart';
 import 'modules/main_page/main.dart';
-import 'modules/square_page/square.dart';
 
 class CompositePage extends StatefulWidget {
   const CompositePage({super.key});
@@ -62,9 +61,6 @@ class _CompositePageState extends State<CompositePage>
                           text: StringStyles.tabHome.tr,
                         ),
                         Tab(
-                          text: StringStyles.tabSquare.tr,
-                        ),
-                        Tab(
                           text: StringStyles.tabAsk.tr,
                         )
                       ],
@@ -95,7 +91,6 @@ class _CompositePageState extends State<CompositePage>
                 controller: tabController,
                 children: const [
                   KeepAliveWrapper(child: MainPage()),
-                  KeepAliveWrapper(child: SquarePage()),
                   KeepAliveWrapper(child: AskPage())
                 ],
               )),
