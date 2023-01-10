@@ -32,7 +32,5 @@ class Language{
 final languageList = [
   Language(StringStyles.settingLanguageDefault.tr, '', ''),
   Language('简体中文', 'zh', 'CN'),
-  Language('繁體中文(香港)', 'zh', 'HK'),
-  Language('繁體中文(台灣)', 'zh', 'TW'),
-  Language('English', 'zh', 'US'),
+  Language('English', 'en', 'US'),
 ];

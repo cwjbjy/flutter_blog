@@ -62,7 +62,6 @@ class RequestRepository {
   /// [title] 文章标题
   /// [link] 文章链接
   /// [success] 请求成功回调
-  /// [fail] 请求失败回调
   static shareArticle(
     String title,
     String link, {
@@ -91,10 +90,9 @@ class RequestRepository {
     });
   }
 
-    ///请求首页文章列表接口
+  ///请求首页文章列表接口
   ///[id]文章ID
   /// [success] 请求成功回调
-  /// [fail] 请求失败回调
   static requestHomeArticle(
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
@@ -112,4 +110,50 @@ class RequestRepository {
     });
   }
 
+  ///请求项目列表接口
+  ///[page]文章页数
+  /// [success] 请求成功回调
+  static requestTabModule(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiProject.replaceFirst(RegExp('page'), '$page'),
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    });
+  }
+
+  /// 用户信息
+  /// [success] 请求成功回调
+  static getUserInfo({
+    Success<UserEntity>? success,
+  }) {
+    Request.get<dynamic>(RequestApi.apiUserInfo, dialog: false,
+        success: (data) {
+      if (success != null) {
+        var userInfo = data["userInfo"];
+        userInfo = UserEntity.fromJson(userInfo);
+        success(userInfo);
+      }
+    });
+  }
+
+  ///退出登录
+  static exitLogin({
+    Success<bool>? success,
+    Fail? fail,
+  }) {
+    Request.post<dynamic>(RequestApi.apiLogout, dialog: false, success: (data) {
+      if (success != null) {
+        success(true);
+      }
+    });
+  }
 }

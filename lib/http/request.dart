@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_blog/http/api.dart';
+// import 'package:flutter_blog/http/api.dart';
 import 'package:flutter_blog/http/dio.dart';
 import 'package:flutter_blog/model/request_result.dart';
 import 'package:flutter_blog/util/toast_util.dart';
@@ -54,7 +54,7 @@ class Request {
     if (dialog) {
       Get.showLoading();
     }
-    debugPrint("request url ==============> ${RequestApi.baseurl}$url");
+    // debugPrint("request url ==============> ${RequestApi.baseurl}$url");
 
     ///开启请求
     HttpRequest.request(method, url, params: params, isJson: isJson,
@@ -64,7 +64,7 @@ class Request {
       }
       if (success != null) {
         var resultModel = Result.fromJson(result);
-        debugPrint("request success =>$resultModel");
+        // debugPrint("request success =>$resultModel");
         if (resultModel.errorCode == 0) {
           success(resultModel.data);
         } else {

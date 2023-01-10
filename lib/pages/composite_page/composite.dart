@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/constants/r.dart';
 import 'package:flutter_blog/i18/strings.dart';
-import 'package:flutter_blog/routes/routes.dart';
 import 'package:flutter_blog/style/colors.dart';
 import 'package:flutter_blog/style/style.dart';
 import 'package:flutter_blog/widget/keepAlive.dart';
-import 'package:flutter_blog/widget/ripple_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'modules/ask_page/ask.dart';
@@ -71,17 +67,17 @@ class _CompositePageState extends State<CompositePage>
                   const Expanded(child: SizedBox()),
 
                   ///搜索框
-                  Ripple(
-                      circular: 20,
-                      onTap: () => Get.toNamed(Routes.searchPage),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: SvgPicture.asset(
-                          R.assetsImagesSearch,
-                          color: Colors.black87,
-                          width: 30,
-                        ),
-                      )),
+                  // Ripple(
+                  //     circular: 20,
+                  //     onTap: () => Get.toNamed(Routes.searchPage),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.all(5),
+                  //       child: SvgPicture.asset(
+                  //         R.assetsImagesSearch,
+                  //         color: Colors.black87,
+                  //         width: 30,
+                  //       ),
+                  //     )),
 
                   Box.hBox20
                 ],

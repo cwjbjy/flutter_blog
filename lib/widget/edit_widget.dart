@@ -41,7 +41,9 @@ class _EditWidgetState extends State<EditWidget> {
         Container(
           margin: const EdgeInsets.only(top: 8, bottom: 8, left: 25, right: 25),
           child: TextField(
-            keyboardType: TextInputType.number, //键盘类型
+            keyboardType: widget.passwordType //键盘类型
+                ? TextInputType.number
+                : TextInputType.text,
             textAlign: TextAlign.left,
             autofocus: false,
             maxLines: 1,

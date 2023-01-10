@@ -43,7 +43,7 @@ const en_US = {
   StringStyles.aboutVersion: 'Version:',
   StringStyles.aboutBuild: 'build:',
   StringStyles.aboutGithub: 'Github',
-  StringStyles.aboutCSDN: 'CSDN',
+  StringStyles.aboutJueJin: 'juejin',
   StringStyles.aboutSupport: 'Technical Support',
   StringStyles.aboutCopyright: 'Copyright@2021\nAll Right Reserved',
   StringStyles.feedbackTitleStar: "Feedback*",

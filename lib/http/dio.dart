@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter_blog/model/request_register.dart';
+import 'package:flutter_blog/util/save/sp_util.dart';
 import 'api.dart';
 
 typedef Success<T> = Function(T data);
@@ -58,12 +60,28 @@ class HttpRequest {
       }
       Dio dio = createInstance(isJson);
       Response response = await dio.request(path,
-          data: params, options: Options(method: _methodValues[method]));
+          data: params,
+          options:
+              Options(method: _methodValues[method], headers: _headerToken()));
       success(response.data);
     } on DioError catch (e) {
       fail('异常=====>$e');
     }
   }
+}
+
+/// 请求时添加cookie
+Map<String, dynamic>? _headerToken() {
+  /// 自定义Header,如需要添加token信息请调用此参数
+  UserEntity? info = SpUtil.getUserInfo();
+  if (info == null) {
+    return null;
+  }
+  Map<String, dynamic> httpHeaders = {
+    'Cookie':
+        'loginUserName=${info.username};loginUserPassword=${info.password}',
+  };
+  return httpHeaders;
 }
 
 ///请求类型枚举

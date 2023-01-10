@@ -47,7 +47,7 @@ class StringStyles {
   static const String aboutVersion = 'aboutVersion:';
   static const String aboutBuild = 'aboutBuild';
   static const String aboutGithub = 'aboutGithub';
-  static const String aboutCSDN = 'aboutCSDN';
+  static const String aboutJueJin = 'aboutJueJin';
   static const String aboutSupport = 'aboutSupport';
   static const String aboutCopyright = 'aboutCopyright';
 

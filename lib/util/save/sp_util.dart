@@ -33,6 +33,22 @@ class SpUtil {
         .setString(SPKey.language, jsonEncode(language));
   }
 
+  ///更新用户信息，需要保存密码
+  ///[userInfo] 用户信息
+  static notifyUserInfo(UserEntity userInfo) {
+    var oldInfo = getUserInfo();
+    if (oldInfo != null) {
+      userInfo.password = oldInfo.password;
+    }
+    SpUtil.deleteUserInfo();
+    SpUtil.putUserInfo(userInfo);
+  }
+
+  ///删除存储用户信息
+  static deleteUserInfo() {
+    Get.find<SharedPreferences>().remove(SPKey.keyUserInfo);
+  }
+
   ///获取用户信息
   ///[UserEntity] 用户信息
   static UserEntity? getUserInfo() {
@@ -71,6 +87,11 @@ class SpUtil {
     var toJson = jsonEncode(detail.toJson());
     history.insert(0, toJson);
     Get.find<SharedPreferences>().setStringList(SPKey.browseHistory, history);
+  }
+
+  ///浏览记录长度
+  static int getBrowseHistoryLength() {
+    return getBrowseHistory().length;
   }
 
   ///获取浏览历史记录

@@ -10,6 +10,7 @@ import 'package:flutter_blog/widget/dialog/dialog_share_article.dart';
 import 'package:flutter_blog/widget/keepAlive.dart';
 import 'package:get/get.dart';
 
+import 'home_controller.dart';
 import 'widget/home_tab_title.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,6 +65,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return Scaffold(
       backgroundColor: ColorStyle.color_F8F9FC,
       body: TabBarView(

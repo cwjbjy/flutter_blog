@@ -29,7 +29,6 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('detail--link----${detail.link}');
     return GetPlatform.isWindows
         ? const Text('暂不支持web打开，请在APP中打开')
         : WillPopScope(

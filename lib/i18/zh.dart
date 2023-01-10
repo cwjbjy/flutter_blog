@@ -41,7 +41,7 @@ const zh_CN = {
   StringStyles.aboutVersion: '版本:',
   StringStyles.aboutBuild: 'build:',
   StringStyles.aboutGithub: 'Github',
-  StringStyles.aboutCSDN: 'CSDN',
+  StringStyles.aboutJueJin: '掘金',
   StringStyles.aboutSupport: '技术支持',
   StringStyles.aboutCopyright: 'Copyright@2021\nAll Right Reserved',
   StringStyles.feedbackTitleStar: "问题反馈*",
