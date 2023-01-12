@@ -61,11 +61,7 @@ class _MainPageState extends State<MainPage> {
 
   void getBanner() {
     RequestRepository.getBanner(success: (data) {
-      ///添加自定义的积分排行榜图片
-      banner.add(Banners(
-        imagePath: R.assetsIntegralRanking,
-        isAssets: true,
-      ));
+
       banner.addAll(data);
       setState(() {});
 
@@ -106,11 +102,7 @@ class _MainPageState extends State<MainPage> {
                             banner,
                             height: 140,
                             onTap: (index) {
-                              if (index == 0) {
-                                Get.toNamed(Routes.rankingPage);
-                              } else {
-                                WebUtil.toWebPageBanners(banner[index]);
-                              }
+                              WebUtil.toWebPageBanners(banner[index]);
                             },
                           ),
                         );

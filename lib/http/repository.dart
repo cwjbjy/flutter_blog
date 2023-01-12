@@ -150,7 +150,7 @@ class RequestRepository {
     Success<bool>? success,
     Fail? fail,
   }) {
-    Request.post<dynamic>(RequestApi.apiLogout, dialog: false, success: (data) {
+    Request.get<dynamic>(RequestApi.apiLogout, dialog: false, success: (data) {
       if (success != null) {
         success(true);
       }
