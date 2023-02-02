@@ -1,7 +1,7 @@
 import 'strings.dart';
 
 const zh_CN = {
-  StringStyles.appName: '博时',
+  StringStyles.appName: '博客',
   StringStyles.loading: '加载中...',
   StringStyles.loginAccountNameHint: '请输入账号名',
   StringStyles.loginAccountPwdHint: '请输入密码',
@@ -37,7 +37,7 @@ const zh_CN = {
   StringStyles.userRankingTitle: '积分排行榜',
   StringStyles.userRankingNumber: '排名',
   StringStyles.userRankingCoin: '累计积分',
-  StringStyles.aboutTitle: '关于博时',
+  StringStyles.aboutTitle: '关于博客',
   StringStyles.aboutVersion: '版本:',
   StringStyles.aboutBuild: 'build:',
   StringStyles.aboutGithub: 'Github',
@@ -75,7 +75,7 @@ const zh_CN = {
   StringStyles.enter: "确认",
   StringStyles.quit: "取消",
   StringStyles.shareApplication: "实用博客APP推荐给您",
-  StringStyles.shareHint: "博时,您的博客管家",
+  StringStyles.shareHint: "博客,您的博客管家",
   StringStyles.shareSaveLocal: "保存到本地",
   StringStyles.shareBrowser: "浏览器打开",
   StringStyles.saveSuccess: "保存成功",

@@ -1,7 +1,7 @@
 import 'strings.dart';
 
 const en_US = {
-  StringStyles.appName: 'BlogTime',
+  StringStyles.appName: 'Blog',
   StringStyles.loading: 'Loading...',
   StringStyles.loginAccountNameHint: 'Please enter the account name',
   StringStyles.loginAccountPwdHint: 'Please enter the password',
